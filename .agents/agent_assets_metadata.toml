@@ -1,0 +1,8 @@
+uploads = []
+generated = []
+
+[[outputs]]
+id = "fr1BNNXSWMP7FKga-l1Nh"
+uri = "file://slides/goalai-deck.html"
+type = "unspecified"
+title = "GOAL AI — Project Deck"

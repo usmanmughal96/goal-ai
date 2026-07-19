@@ -1,0 +1,666 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>GOAL AI — Project Deck</title>
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --lime: #a3e635;
+    --lime-dim: #84cc16;
+    --bg: #09090b;
+    --surface: #18181b;
+    --border: rgba(255,255,255,0.07);
+    --text: #fafafa;
+    --muted: #71717a;
+    --orange: #f97316;
+  }
+
+  body {
+    font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    height: 100vh;
+    overflow: hidden;
+    user-select: none;
+  }
+
+  /* ── Deck container ── */
+  #deck {
+    width: 100vw;
+    height: 100vh;
+    position: relative;
+  }
+
+  .slide {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 60px 80px;
+    opacity: 0;
+    pointer-events: none;
+    transform: translateY(24px);
+    transition: opacity .4s ease, transform .4s ease;
+  }
+  .slide.active {
+    opacity: 1;
+    pointer-events: all;
+    transform: translateY(0);
+  }
+  .slide.exit {
+    opacity: 0;
+    transform: translateY(-24px);
+  }
+
+  /* ── Shared typography ── */
+  .tag {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 4px 14px;
+    border: 1px solid rgba(163,230,53,.35);
+    background: rgba(163,230,53,.08);
+    color: var(--lime);
+    border-radius: 999px;
+    font-size: 10px;
+    font-weight: 800;
+    letter-spacing: .14em;
+    text-transform: uppercase;
+    margin-bottom: 24px;
+  }
+  h1 {
+    font-size: clamp(56px, 8vw, 96px);
+    font-weight: 900;
+    font-style: italic;
+    text-transform: uppercase;
+    letter-spacing: -.04em;
+    line-height: .95;
+    text-align: center;
+  }
+  h2 {
+    font-size: clamp(32px, 4vw, 52px);
+    font-weight: 900;
+    font-style: italic;
+    text-transform: uppercase;
+    letter-spacing: -.03em;
+    line-height: 1;
+    text-align: center;
+    margin-bottom: 12px;
+  }
+  .accent { color: var(--lime); }
+  .sub {
+    color: var(--muted);
+    font-size: 13px;
+    text-align: center;
+    letter-spacing: .1em;
+    text-transform: uppercase;
+    font-weight: 700;
+    margin-top: 10px;
+  }
+  p.body {
+    color: #a1a1aa;
+    font-size: clamp(14px, 1.6vw, 18px);
+    line-height: 1.7;
+    max-width: 680px;
+    text-align: center;
+    margin-top: 20px;
+  }
+
+  /* ── Grid cards ── */
+  .card-grid {
+    display: grid;
+    gap: 16px;
+    width: 100%;
+    max-width: 900px;
+    margin-top: 36px;
+  }
+  .card-grid.cols-2 { grid-template-columns: 1fr 1fr; }
+  .card-grid.cols-3 { grid-template-columns: 1fr 1fr 1fr; }
+  .card-grid.cols-4 { grid-template-columns: 1fr 1fr 1fr 1fr; }
+
+  .card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    padding: 24px 20px;
+    text-align: left;
+  }
+  .card .icon { font-size: 28px; margin-bottom: 12px; display: block; }
+  .card h3 {
+    font-size: 13px;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: .1em;
+    color: var(--text);
+    margin-bottom: 8px;
+  }
+  .card p {
+    font-size: 12.5px;
+    color: #71717a;
+    line-height: 1.6;
+  }
+  .card.lime { border-color: rgba(163,230,53,.25); background: rgba(163,230,53,.04); }
+  .card.lime h3 { color: var(--lime); }
+
+  /* ── Pill list ── */
+  .pill-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    justify-content: center;
+    margin-top: 32px;
+    max-width: 820px;
+  }
+  .pill {
+    padding: 8px 18px;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 999px;
+    font-size: 13px;
+    font-weight: 700;
+    color: var(--text);
+  }
+  .pill.green { border-color: rgba(163,230,53,.4); color: var(--lime); background: rgba(163,230,53,.06); }
+  .pill.orange { border-color: rgba(249,115,22,.4); color: var(--orange); background: rgba(249,115,22,.06); }
+
+  /* ── Step list ── */
+  .steps {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    max-width: 720px;
+    width: 100%;
+    margin-top: 32px;
+    text-align: left;
+  }
+  .step {
+    display: flex;
+    align-items: flex-start;
+    gap: 16px;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    padding: 18px 22px;
+  }
+  .step-num {
+    min-width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    background: var(--lime);
+    color: #000;
+    font-size: 13px;
+    font-weight: 900;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+  }
+  .step-body h4 { font-size: 13px; font-weight: 800; text-transform: uppercase; letter-spacing: .08em; margin-bottom: 4px; }
+  .step-body p { font-size: 12.5px; color: #71717a; line-height: 1.5; }
+
+  /* ── Stat row ── */
+  .stat-row {
+    display: flex;
+    gap: 24px;
+    margin-top: 40px;
+    max-width: 860px;
+    width: 100%;
+  }
+  .stat {
+    flex: 1;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    padding: 24px 20px;
+    text-align: center;
+  }
+  .stat .value {
+    font-size: clamp(28px, 4vw, 48px);
+    font-weight: 900;
+    font-style: italic;
+    color: var(--lime);
+    display: block;
+    letter-spacing: -.03em;
+  }
+  .stat .label { font-size: 10px; font-weight: 800; text-transform: uppercase; letter-spacing: .14em; color: var(--muted); margin-top: 6px; display: block; }
+
+  /* ── Tech table ── */
+  .tech-table {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+    max-width: 860px;
+    width: 100%;
+    margin-top: 36px;
+  }
+  .tech-row {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 14px 18px;
+  }
+  .tech-row .badge {
+    padding: 3px 10px;
+    border-radius: 6px;
+    font-size: 10px;
+    font-weight: 800;
+    letter-spacing: .08em;
+    text-transform: uppercase;
+    flex-shrink: 0;
+  }
+  .badge-lime { background: rgba(163,230,53,.15); color: var(--lime); }
+  .badge-blue { background: rgba(59,130,246,.15); color: #60a5fa; }
+  .badge-orange { background: rgba(249,115,22,.15); color: var(--orange); }
+  .badge-purple { background: rgba(168,85,247,.15); color: #c084fc; }
+  .tech-row span { font-size: 12.5px; color: #a1a1aa; }
+
+  /* ── Divider line ── */
+  .divider { width: 48px; height: 3px; background: var(--lime); border-radius: 2px; margin: 20px auto; }
+
+  /* ── Background glow ── */
+  .glow {
+    position: absolute;
+    border-radius: 50%;
+    filter: blur(120px);
+    pointer-events: none;
+    z-index: 0;
+  }
+  .slide > * { position: relative; z-index: 1; }
+
+  /* ── Footer nav ── */
+  #nav {
+    position: fixed;
+    bottom: 28px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    background: rgba(24,24,27,.9);
+    border: 1px solid var(--border);
+    border-radius: 999px;
+    padding: 10px 20px;
+    backdrop-filter: blur(12px);
+    z-index: 100;
+  }
+  #nav button {
+    background: none;
+    border: none;
+    color: #71717a;
+    cursor: pointer;
+    font-size: 18px;
+    display: flex;
+    align-items: center;
+    padding: 4px 8px;
+    border-radius: 8px;
+    transition: color .2s, background .2s;
+  }
+  #nav button:hover { color: var(--lime); background: rgba(163,230,53,.08); }
+  #nav button:disabled { opacity: .25; cursor: default; }
+  #nav button:disabled:hover { color: #71717a; background: none; }
+  #counter {
+    font-size: 11px;
+    font-weight: 700;
+    color: #52525b;
+    letter-spacing: .08em;
+    min-width: 48px;
+    text-align: center;
+  }
+
+  /* ── Progress dots ── */
+  #dots {
+    position: fixed;
+    right: 28px;
+    top: 50%;
+    transform: translateY(-50%);
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    z-index: 100;
+  }
+  .dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: #3f3f46;
+    cursor: pointer;
+    transition: background .2s, transform .2s;
+  }
+  .dot.active { background: var(--lime); transform: scale(1.5); }
+
+  /* ── Slide-specific overrides ── */
+  #slide-1 h1 { text-align: center; }
+
+  .architecture {
+    display: flex;
+    align-items: center;
+    gap: 0;
+    max-width: 860px;
+    width: 100%;
+    margin-top: 36px;
+  }
+  .arch-box {
+    flex: 1;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    padding: 20px 16px;
+    text-align: center;
+  }
+  .arch-box .icon { font-size: 30px; margin-bottom: 10px; display: block; }
+  .arch-box h4 { font-size: 11px; font-weight: 800; text-transform: uppercase; letter-spacing: .1em; color: var(--text); margin-bottom: 6px; }
+  .arch-box p { font-size: 11px; color: var(--muted); line-height: 1.5; }
+  .arch-arrow {
+    font-size: 20px;
+    color: var(--lime);
+    padding: 0 10px;
+    flex-shrink: 0;
+  }
+</style>
+</head>
+<body>
+
+<div id="deck">
+
+  <!-- SLIDE 1: Title -->
+  <div class="slide active" id="slide-1">
+    <div class="glow" style="width:600px;height:600px;background:rgba(163,230,53,.06);top:-100px;left:50%;transform:translateX(-50%)"></div>
+    <div class="tag">⚽ Computer Vision Penalty Simulator</div>
+    <h1>GOAL <span class="accent">AI</span></h1>
+    <div class="divider"></div>
+    <p class="sub">Webcam Gesture Edition &nbsp;·&nbsp; By M Usman Mughal</p>
+    <p class="body">A real-time football penalty kick simulator that uses your webcam and hand gesture tracking — running entirely in the browser, no server needed.</p>
+  </div>
+
+  <!-- SLIDE 2: What is it -->
+  <div class="slide" id="slide-2">
+    <div class="tag">01 — Overview</div>
+    <h2>What Is <span class="accent">GOAL AI?</span></h2>
+    <p class="body">GOAL AI puts you on the penalty spot. Position your hand in front of the camera, aim at the goal, and throw a thumbs-up gesture to strike. A smart AI goalkeeper reacts in real time.</p>
+    <div class="stat-row">
+      <div class="stat">
+        <span class="value">60</span>
+        <span class="label">FPS Gameplay</span>
+      </div>
+      <div class="stat">
+        <span class="value">0ms</span>
+        <span class="label">Server Round-trips</span>
+      </div>
+      <div class="stat">
+        <span class="value">21</span>
+        <span class="label">Hand Landmarks Tracked</span>
+      </div>
+      <div class="stat">
+        <span class="value">3</span>
+        <span class="label">Difficulty Levels</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- SLIDE 3: How it works -->
+  <div class="slide" id="slide-3">
+    <div class="tag">02 — Under the Hood</div>
+    <h2>How It <span class="accent">Works</span></h2>
+    <div class="architecture">
+      <div class="arch-box">
+        <span class="icon">📷</span>
+        <h4>Webcam Input</h4>
+        <p>getUserMedia captures your video stream at 640×480</p>
+      </div>
+      <div class="arch-arrow">→</div>
+      <div class="arch-box">
+        <span class="icon">🤚</span>
+        <h4>MediaPipe Hands</h4>
+        <p>21 3D hand landmarks detected at ~8 FPS via WebAssembly + WebGL</p>
+      </div>
+      <div class="arch-arrow">→</div>
+      <div class="arch-box">
+        <span class="icon">🎯</span>
+        <h4>Gesture Engine</h4>
+        <p>Thumbs-up detected from landmark geometry; aim mapped from wrist position</p>
+      </div>
+      <div class="arch-arrow">→</div>
+      <div class="arch-box">
+        <span class="icon">⚽</span>
+        <h4>Game Arena</h4>
+        <p>60 FPS canvas render with physics, goalkeeper AI, and crowd sounds</p>
+      </div>
+    </div>
+    <p class="body" style="margin-top:24px">Falls back to optical-flow pixel-diff tracking when MediaPipe is unavailable.</p>
+  </div>
+
+  <!-- SLIDE 4: Tech Stack -->
+  <div class="slide" id="slide-4">
+    <div class="tag">03 — Tech Stack</div>
+    <h2>Built <span class="accent">With</span></h2>
+    <div class="tech-table">
+      <div class="tech-row"><span class="badge badge-lime">Frontend</span><span>React 19 + TypeScript</span></div>
+      <div class="tech-row"><span class="badge badge-blue">Bundler</span><span>Vite 6 — sub-4s production builds</span></div>
+      <div class="tech-row"><span class="badge badge-lime">Styling</span><span>Tailwind CSS v4 (Vite plugin)</span></div>
+      <div class="tech-row"><span class="badge badge-orange">CV Engine</span><span>MediaPipe Hands (CDN / WASM)</span></div>
+      <div class="tech-row"><span class="badge badge-purple">Animation</span><span>Motion (Framer Motion v12)</span></div>
+      <div class="tech-row"><span class="badge badge-blue">Icons</span><span>Lucide React</span></div>
+      <div class="tech-row"><span class="badge badge-lime">Audio</span><span>Web Audio API — procedural synth</span></div>
+      <div class="tech-row"><span class="badge badge-orange">Hosting</span><span>Replit Static Deployment</span></div>
+    </div>
+  </div>
+
+  <!-- SLIDE 5: Key Features -->
+  <div class="slide" id="slide-5">
+    <div class="tag">04 — Features</div>
+    <h2>Key <span class="accent">Features</span></h2>
+    <div class="card-grid cols-2" style="max-width:780px">
+      <div class="card lime">
+        <span class="icon">🤚</span>
+        <h3>Thumbs-Up Kick</h3>
+        <p>Make a thumbs-up gesture to fire a shot. Landmark 4 (thumb tip) and fold-count logic make it reliable and false-positive-free.</p>
+      </div>
+      <div class="card">
+        <span class="icon">🎯</span>
+        <h3>Dynamic Aim</h3>
+        <p>Your wrist position maps directly to the goal. Move left/right/up/down to aim anywhere on the frame.</p>
+      </div>
+      <div class="card">
+        <span class="icon">🤖</span>
+        <h3>Goalkeeper AI</h3>
+        <p>The keeper reacts with difficulty-scaled speed and dive radius. Three levels: easy, medium, hard.</p>
+      </div>
+      <div class="card lime">
+        <span class="icon">🔊</span>
+        <h3>Stadium Synth Audio</h3>
+        <p>Procedural crowd buzz, whistle, and post-thud sounds via the Web Audio API — zero audio files shipped.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- SLIDE 6: How to Play -->
+  <div class="slide" id="slide-6">
+    <div class="tag">05 — How to Play</div>
+    <h2>Play in <span class="accent">3 Steps</span></h2>
+    <div class="steps">
+      <div class="step">
+        <div class="step-num">1</div>
+        <div class="step-body">
+          <h4>Allow Camera Access</h4>
+          <p>The game requests your webcam on load. No video is recorded or sent anywhere — all processing is local in the browser.</p>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">2</div>
+        <div class="step-body">
+          <h4>Position Your Hand</h4>
+          <p>Hold your hand up in front of the camera. The real-time PIP overlay shows where your hand is being tracked on the pitch.</p>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">3</div>
+        <div class="step-body">
+          <h4>Thumbs Up to Shoot</h4>
+          <p>Fold your four fingers and raise your thumb. The game detects the gesture and fires a shot based on your wrist position.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SLIDE 7: Architecture -->
+  <div class="slide" id="slide-7">
+    <div class="tag">06 — Project Structure</div>
+    <h2>App <span class="accent">Architecture</span></h2>
+    <div class="card-grid cols-3" style="max-width:860px">
+      <div class="card lime">
+        <span class="icon">🎮</span>
+        <h3>GameArena</h3>
+        <p>Main game loop. Handles physics, ball trajectory, goalkeeper AI, scoring, and 60 FPS canvas rendering.</p>
+      </div>
+      <div class="card">
+        <span class="icon">🧠</span>
+        <h3>CV Engine</h3>
+        <p><code>src/utils/cvEngine.ts</code> — wraps MediaPipe + optical-flow fallback. Emits landmark data and flick vectors.</p>
+      </div>
+      <div class="card">
+        <span class="icon">🧙</span>
+        <h3>SetupWizard</h3>
+        <p>Calibration flow for sensitivity, zone, difficulty, and goalkeeper colour before entering the arena.</p>
+      </div>
+      <div class="card">
+        <span class="icon">🏆</span>
+        <h3>Leaderboard</h3>
+        <p>In-session high-score tracking with difficulty filter and animated new-entry insertion.</p>
+      </div>
+      <div class="card">
+        <span class="icon">📢</span>
+        <h3>SocialShare</h3>
+        <p>End-of-match share card generator with score, streak, difficulty badge, and goalkeeper jersey colour.</p>
+      </div>
+      <div class="card lime">
+        <span class="icon">🔊</span>
+        <h3>Audio Utils</h3>
+        <p><code>src/utils/audio.ts</code> — procedural synth sounds. Whistle, crowd, goal celebration, post hit.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- SLIDE 8: Deploy & Run -->
+  <div class="slide" id="slide-8">
+    <div class="tag">07 — Getting Started</div>
+    <h2>Run &amp; <span class="accent">Deploy</span></h2>
+    <div class="card-grid cols-2" style="max-width:760px">
+      <div class="card">
+        <span class="icon">💻</span>
+        <h3>Local Dev</h3>
+        <p style="font-family:monospace;font-size:13px;color:var(--lime);margin-bottom:8px">npm install<br/>npm run dev</p>
+        <p>Serves on <strong>port 5000</strong>. Hot-module replacement enabled. No env vars needed.</p>
+      </div>
+      <div class="card lime">
+        <span class="icon">🚀</span>
+        <h3>Production Build</h3>
+        <p style="font-family:monospace;font-size:13px;color:var(--lime);margin-bottom:8px">npm run build</p>
+        <p>Outputs to <code>dist/</code> in ~4 seconds. Deployed as a <strong>static site</strong> on Replit — no server required.</p>
+      </div>
+      <div class="card">
+        <span class="icon">🔑</span>
+        <h3>No API Keys</h3>
+        <p>Despite using <code>@google/genai</code> as a dependency, the app runs fully offline. Hand tracking is done in-browser via MediaPipe WASM.</p>
+      </div>
+      <div class="card">
+        <span class="icon">🌍</span>
+        <h3>Browser Support</h3>
+        <p>Any modern desktop browser with WebGL + WebAssembly support. Camera required for gesture control; mouse/touch works as fallback.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- SLIDE 9: Closing -->
+  <div class="slide" id="slide-9">
+    <div class="glow" style="width:500px;height:500px;background:rgba(163,230,53,.07);bottom:-100px;left:50%;transform:translateX(-50%)"></div>
+    <div class="tag">⚡ Open Source · Browser-Native</div>
+    <h1><span class="accent">GOAL</span> AI</h1>
+    <div class="divider"></div>
+    <p class="sub">Zero cloud. Zero latency. Pure gesture football.</p>
+    <div class="pill-list">
+      <span class="pill green">React 19</span>
+      <span class="pill green">Vite 6</span>
+      <span class="pill green">MediaPipe Hands</span>
+      <span class="pill">TypeScript</span>
+      <span class="pill">Tailwind v4</span>
+      <span class="pill orange">Static Deployment</span>
+      <span class="pill">Web Audio API</span>
+      <span class="pill">60 FPS Canvas</span>
+    </div>
+  </div>
+
+</div>
+
+<!-- Nav controls -->
+<div id="nav">
+  <button id="btn-prev" title="Previous (←)" disabled>&#8592;</button>
+  <span id="counter">1 / 9</span>
+  <button id="btn-next" title="Next (→)">&#8594;</button>
+</div>
+
+<!-- Progress dots -->
+<div id="dots"></div>
+
+<script>
+  const slides = document.querySelectorAll('.slide');
+  const total = slides.length;
+  let current = 0;
+
+  const btnPrev = document.getElementById('btn-prev');
+  const btnNext = document.getElementById('btn-next');
+  const counter = document.getElementById('counter');
+  const dotsEl = document.getElementById('dots');
+
+  // Build dots
+  slides.forEach((_, i) => {
+    const d = document.createElement('div');
+    d.className = 'dot' + (i === 0 ? ' active' : '');
+    d.addEventListener('click', () => goTo(i));
+    dotsEl.appendChild(d);
+  });
+
+  function goTo(idx) {
+    if (idx < 0 || idx >= total) return;
+    slides[current].classList.remove('active');
+    slides[current].classList.add('exit');
+    setTimeout(() => slides[current].classList.remove('exit'), 400);
+
+    current = idx;
+    slides[current].classList.add('active');
+
+    document.querySelectorAll('.dot').forEach((d, i) => {
+      d.classList.toggle('active', i === current);
+    });
+    counter.textContent = `${current + 1} / ${total}`;
+    btnPrev.disabled = current === 0;
+    btnNext.disabled = current === total - 1;
+  }
+
+  btnPrev.addEventListener('click', () => goTo(current - 1));
+  btnNext.addEventListener('click', () => goTo(current + 1));
+
+  document.addEventListener('keydown', e => {
+    if (e.key === 'ArrowRight' || e.key === 'ArrowDown' || e.key === ' ') { e.preventDefault(); goTo(current + 1); }
+    if (e.key === 'ArrowLeft' || e.key === 'ArrowUp') { e.preventDefault(); goTo(current - 1); }
+    if (e.key === 'Home') { e.preventDefault(); goTo(0); }
+    if (e.key === 'End') { e.preventDefault(); goTo(total - 1); }
+  });
+
+  // Touch / swipe
+  let touchStartX = 0;
+  document.addEventListener('touchstart', e => { touchStartX = e.touches[0].clientX; }, { passive: true });
+  document.addEventListener('touchend', e => {
+    const dx = e.changedTouches[0].clientX - touchStartX;
+    if (Math.abs(dx) > 50) goTo(current + (dx < 0 ? 1 : -1));
+  });
+</script>
+</body>
+</html>
