@@ -8,6 +8,7 @@ import { Camera, Volume2, VolumeX, RotateCcw, Award, Play, AlertCircle, Home, Za
 import { CalibrationData, Difficulty, KickResult, KickResultType } from '../types';
 import { cvInstance, TrackingFrameResult } from '../utils/cvEngine';
 import { soundEffects } from '../utils/audio';
+import { generateCommentary, ShotOutcome } from '../utils/geminiCommentary';
 
 interface GameArenaProps {
   calibration: CalibrationData;
@@ -53,6 +54,9 @@ export default function GameArena({
   const [isKicking, setIsKicking] = useState(false);
   const [isTrackingReady, setIsTrackingReady] = useState(false);
   const isTrackingReadyRef = useRef(false);
+
+  // Gemini AI commentary
+  const [commentary, setCommentary] = useState<string>('');
   
   // High-performance finger-tracking and motion refs (no re-renders!)
   const motionCountRef = useRef(0);
@@ -901,6 +905,12 @@ export default function GameArena({
   const applyOutcome = (type: KickResultType, msg: string, speedKmh: number) => {
     const sim = simRef.current;
     setAttempts(p => p + 1);
+    setCommentary(''); // clear previous commentary
+
+    // Kick off Gemini commentary async — won't block gameplay
+    generateCommentary(type as ShotOutcome, score, streak, difficulty)
+      .then(line => { if (line) setCommentary(line); })
+      .catch(() => {});
 
     if (type === 'goal') {
       soundEffects.playNetSwish();
@@ -967,6 +977,7 @@ export default function GameArena({
 
     setMessageType('info');
     setGameMessage('Raise a Thumbs-Up 👍 to score the next penalty!');
+    setCommentary('');
     sim.roundPending = true;
 
     // Ref Whistle for next shootout
@@ -1235,6 +1246,13 @@ export default function GameArena({
             <div className="mt-[-15px] bg-white text-black px-5 py-1 text-xs font-black uppercase tracking-widest">
               COMBO x{streak}
             </div>
+            {commentary && (
+              <div className="mt-4 flex items-center gap-2 bg-black/70 border border-lime-400/30 px-4 py-2 rounded-full max-w-sm text-center">
+                <span className="text-lime-400 text-[10px]">✦</span>
+                <p className="text-[11px] text-lime-300 font-semibold italic">{commentary}</p>
+                <span className="text-[8px] text-lime-400/50 font-mono uppercase tracking-widest ml-1">Gemini</span>
+              </div>
+            )}
           </div>
         )}
 
@@ -1246,6 +1264,13 @@ export default function GameArena({
             <div className="mt-[-10px] bg-black text-white px-5 py-1 text-[9px] font-black uppercase tracking-widest border border-white/20">
               GOALKEEPER BLOCK
             </div>
+            {commentary && (
+              <div className="mt-4 flex items-center gap-2 bg-black/70 border border-red-400/30 px-4 py-2 rounded-full max-w-sm text-center">
+                <span className="text-red-400 text-[10px]">✦</span>
+                <p className="text-[11px] text-red-300 font-semibold italic">{commentary}</p>
+                <span className="text-[8px] text-red-400/50 font-mono uppercase tracking-widest ml-1">Gemini</span>
+              </div>
+            )}
           </div>
         )}
 
@@ -1257,6 +1282,13 @@ export default function GameArena({
             <div className="mt-[-10px] bg-black text-white px-5 py-1 text-[9px] font-black uppercase tracking-widest border border-white/20">
               WOODWORK RATTLE
             </div>
+            {commentary && (
+              <div className="mt-4 flex items-center gap-2 bg-black/70 border border-orange-400/30 px-4 py-2 rounded-full max-w-sm text-center">
+                <span className="text-orange-400 text-[10px]">✦</span>
+                <p className="text-[11px] text-orange-300 font-semibold italic">{commentary}</p>
+                <span className="text-[8px] text-orange-400/50 font-mono uppercase tracking-widest ml-1">Gemini</span>
+              </div>
+            )}
           </div>
         )}
 
@@ -1268,6 +1300,13 @@ export default function GameArena({
             <div className="mt-[-10px] bg-black text-white px-5 py-1 text-[9px] font-black uppercase tracking-widest border border-white/20">
               OFF TARGET WIDE
             </div>
+            {commentary && (
+              <div className="mt-4 flex items-center gap-2 bg-black/70 border border-white/20 px-4 py-2 rounded-full max-w-sm text-center">
+                <span className="text-zinc-400 text-[10px]">✦</span>
+                <p className="text-[11px] text-zinc-300 font-semibold italic">{commentary}</p>
+                <span className="text-[8px] text-zinc-400/50 font-mono uppercase tracking-widest ml-1">Gemini</span>
+              </div>
+            )}
           </div>
         )}
 
