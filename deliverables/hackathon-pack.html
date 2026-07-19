@@ -1,0 +1,460 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>GOAL AI — Hackathon Submission Pack</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Inter:ital,wght@0,400;0,500;0,600;0,700;0,800;0,900;1,700;1,800;1,900&family=JetBrains+Mono:wght@400;700&display=swap');
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  :root {
+    --lime: #a3e635; --lime2: #84cc16;
+    --bg: #09090b; --s1: #18181b; --s2: #27272a;
+    --border: rgba(255,255,255,0.07); --text: #fafafa;
+    --muted: #71717a; --orange: #f97316; --red: #ef4444; --blue: #60a5fa;
+  }
+  html { scroll-behavior: smooth; }
+  body { font-family: 'Inter', system-ui, sans-serif; background: var(--bg); color: var(--text); }
+
+  /* ── NAV ── */
+  nav {
+    position: sticky; top: 0; z-index: 99;
+    background: rgba(9,9,11,.92); backdrop-filter: blur(16px);
+    border-bottom: 1px solid var(--border);
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 0 40px; height: 56px;
+  }
+  .nav-logo { font-size: 18px; font-weight: 900; font-style: italic; text-transform: uppercase; letter-spacing: -.04em; }
+  .nav-logo span { color: var(--lime); }
+  .nav-links { display: flex; gap: 6px; }
+  .nav-links a {
+    padding: 6px 14px; border-radius: 8px; font-size: 12px; font-weight: 700;
+    text-transform: uppercase; letter-spacing: .08em; text-decoration: none;
+    color: var(--muted); transition: color .2s, background .2s;
+  }
+  .nav-links a:hover { color: var(--lime); background: rgba(163,230,53,.08); }
+  .nav-badge {
+    font-size: 10px; font-weight: 800; text-transform: uppercase; letter-spacing: .12em;
+    color: var(--lime); border: 1px solid rgba(163,230,53,.3); border-radius: 999px; padding: 4px 12px;
+  }
+
+  /* ── SECTIONS ── */
+  section { max-width: 960px; margin: 0 auto; padding: 72px 40px; border-bottom: 1px solid var(--border); }
+  section:last-child { border-bottom: none; }
+
+  /* ── HERO ── */
+  .hero { text-align: center; padding-top: 80px; padding-bottom: 80px; }
+  .hero-tag {
+    display: inline-flex; align-items: center; gap: 8px;
+    padding: 6px 16px; border: 1px solid rgba(163,230,53,.35);
+    background: rgba(163,230,53,.07); border-radius: 999px;
+    font-size: 11px; font-weight: 800; letter-spacing: .14em; text-transform: uppercase;
+    color: var(--lime); margin-bottom: 28px;
+  }
+  .hero h1 {
+    font-size: clamp(64px, 10vw, 110px); font-weight: 900; font-style: italic;
+    text-transform: uppercase; letter-spacing: -.05em; line-height: .92;
+  }
+  .hero h1 span { color: var(--lime); }
+  .hero-sub { font-size: 13px; font-weight: 700; letter-spacing: .18em; text-transform: uppercase; color: var(--muted); margin-top: 16px; }
+  .hero-desc { font-size: 16px; color: #a1a1aa; max-width: 560px; margin: 20px auto 0; line-height: 1.7; }
+  .hero-tracks { display: flex; gap: 10px; justify-content: center; margin-top: 28px; }
+  .track { padding: 7px 16px; border-radius: 8px; font-size: 11px; font-weight: 800; text-transform: uppercase; letter-spacing: .1em; }
+  .track.replit { background: rgba(163,230,53,.12); color: var(--lime); border: 1px solid rgba(163,230,53,.3); }
+  .track.gai { background: rgba(66,133,244,.12); color: var(--blue); border: 1px solid rgba(66,133,244,.3); }
+  .divider { width: 48px; height: 3px; background: var(--lime); border-radius: 2px; margin: 24px auto 0; }
+
+  /* ── SECTION HEADERS ── */
+  .sec-label {
+    font-size: 10px; font-weight: 800; letter-spacing: .2em; text-transform: uppercase;
+    color: var(--lime); margin-bottom: 10px; display: flex; align-items: center; gap: 8px;
+  }
+  .sec-label::after { content: ''; flex: 1; height: 1px; background: rgba(163,230,53,.2); }
+  .sec-title { font-size: clamp(28px, 4vw, 40px); font-weight: 900; font-style: italic; text-transform: uppercase; letter-spacing: -.03em; margin-bottom: 32px; }
+
+  /* ── CARDS ── */
+  .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 16px; }
+  .grid-3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 14px; margin-bottom: 16px; }
+  .grid-4 { display: grid; grid-template-columns: repeat(4,1fr); gap: 12px; margin-bottom: 16px; }
+  .card { background: var(--s1); border: 1px solid var(--border); border-radius: 16px; padding: 22px; }
+  .card.lime { border-color: rgba(163,230,53,.22); background: rgba(163,230,53,.04); }
+  .card.orange { border-color: rgba(249,115,22,.22); background: rgba(249,115,22,.04); }
+  .card.blue { border-color: rgba(96,165,250,.22); background: rgba(96,165,250,.04); }
+  .card-icon { font-size: 26px; margin-bottom: 12px; display: block; }
+  .card-label { font-size: 9px; font-weight: 800; letter-spacing: .18em; text-transform: uppercase; color: var(--muted); margin-bottom: 8px; }
+  .card.lime .card-label { color: var(--lime); }
+  .card.orange .card-label { color: var(--orange); }
+  .card h3 { font-size: 14px; font-weight: 800; margin-bottom: 8px; }
+  .card p { font-size: 12.5px; color: #a1a1aa; line-height: 1.65; }
+  .stat-big { font-size: 40px; font-weight: 900; font-style: italic; color: var(--lime); letter-spacing: -.04em; line-height: 1; display: block; }
+  .stat-lbl { font-size: 9px; font-weight: 700; letter-spacing: .14em; text-transform: uppercase; color: var(--muted); margin-top: 6px; display: block; }
+
+  /* ── TEAM ── */
+  .team-card {
+    background: var(--s1); border: 1px solid rgba(163,230,53,.2); border-radius: 16px;
+    padding: 28px; display: flex; align-items: center; gap: 24px; max-width: 480px;
+  }
+  .avatar {
+    width: 64px; height: 64px; border-radius: 50%;
+    background: linear-gradient(135deg, var(--lime), #4d7c0f);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 26px; font-weight: 900; color: #000; flex-shrink: 0;
+  }
+  .team-info .name { font-size: 20px; font-weight: 900; }
+  .team-info .role { font-size: 12px; color: var(--muted); margin-top: 4px; }
+  .team-info .pills { display: flex; gap: 6px; margin-top: 10px; flex-wrap: wrap; }
+  .pill { padding: 3px 10px; border-radius: 6px; font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: .08em; }
+  .pill.g { background: rgba(163,230,53,.1); color: var(--lime); border: 1px solid rgba(163,230,53,.25); }
+  .pill.d { background: var(--s2); color: var(--muted); border: 1px solid var(--border); }
+
+  /* ── FLOW ── */
+  .flow { display: flex; align-items: center; gap: 0; margin: 20px 0; }
+  .flow-box { flex: 1; background: var(--s2); border: 1px solid var(--border); border-radius: 12px; padding: 16px 12px; text-align: center; }
+  .flow-box .icon { font-size: 22px; display: block; margin-bottom: 6px; }
+  .flow-box .lbl { font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: .08em; color: #a1a1aa; }
+  .flow-arrow { color: var(--lime); font-size: 18px; font-weight: 900; padding: 0 8px; flex-shrink: 0; }
+
+  /* ── TECH PILLS ── */
+  .tech-pills { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 16px; }
+  .tp { padding: 5px 12px; border-radius: 8px; font-size: 12px; font-weight: 600; }
+  .tp.g { background: rgba(163,230,53,.1); color: var(--lime); border: 1px solid rgba(163,230,53,.3); }
+  .tp.d { background: var(--s2); color: #d4d4d8; border: 1px solid var(--border); }
+  .tp.b { background: rgba(96,165,250,.1); color: var(--blue); border: 1px solid rgba(96,165,250,.3); }
+
+  /* ── GEMINI BADGE ── */
+  .gemini-badge {
+    display: inline-flex; align-items: center; gap: 8px;
+    padding: 8px 16px; border-radius: 10px; margin-top: 14px;
+    background: linear-gradient(135deg, rgba(66,133,244,.12), rgba(52,168,83,.12));
+    border: 1px solid rgba(66,133,244,.3); font-size: 12px; font-weight: 700; color: #93c5fd;
+  }
+
+  /* ── FEATURES LIST ── */
+  .feat-list { list-style: none; margin-top: 16px; display: flex; flex-direction: column; gap: 0; }
+  .feat-list li {
+    display: flex; gap: 12px; font-size: 13px; color: #a1a1aa;
+    padding: 11px 0; border-bottom: 1px solid var(--border); line-height: 1.5; align-items: flex-start;
+  }
+  .feat-list li:last-child { border-bottom: none; }
+  .feat-bullet { color: var(--lime); font-weight: 900; font-size: 16px; flex-shrink: 0; line-height: 1.4; }
+
+  /* ── SCRIPTS ── */
+  .script-card { background: var(--s1); border: 1px solid var(--border); border-radius: 20px; overflow: hidden; margin-bottom: 24px; }
+  .script-header {
+    padding: 20px 28px; border-bottom: 1px solid var(--border);
+    display: flex; align-items: center; justify-content: space-between;
+  }
+  .script-header .title { font-size: 16px; font-weight: 900; font-style: italic; text-transform: uppercase; letter-spacing: -.02em; }
+  .script-header .badge {
+    padding: 5px 12px; border-radius: 8px; font-size: 11px; font-weight: 800;
+    text-transform: uppercase; letter-spacing: .1em;
+  }
+  .badge-lime { background: rgba(163,230,53,.12); color: var(--lime); border: 1px solid rgba(163,230,53,.3); }
+  .badge-orange { background: rgba(249,115,22,.12); color: var(--orange); border: 1px solid rgba(249,115,22,.3); }
+  .script-body { padding: 28px; }
+  .script-tip {
+    background: var(--s2); border: 1px solid var(--border); border-radius: 10px;
+    padding: 12px 16px; font-size: 11.5px; color: var(--muted); margin-bottom: 20px; line-height: 1.6;
+  }
+  .script-tip strong { color: var(--lime); }
+  .cue { margin-bottom: 22px; }
+  .cue-time {
+    display: inline-block; font-family: 'JetBrains Mono', monospace; font-size: 10px; font-weight: 700;
+    color: var(--lime); background: rgba(163,230,53,.1); border: 1px solid rgba(163,230,53,.25);
+    border-radius: 6px; padding: 2px 8px; margin-bottom: 8px; text-transform: uppercase; letter-spacing: .06em;
+  }
+  .cue-title { font-size: 11px; font-weight: 800; text-transform: uppercase; letter-spacing: .12em; color: var(--muted); margin-bottom: 8px; }
+  .cue blockquote {
+    background: rgba(255,255,255,.03); border-left: 3px solid var(--lime);
+    border-radius: 0 10px 10px 0; padding: 14px 16px;
+    font-size: 14px; color: var(--text); line-height: 1.75; font-style: italic;
+  }
+  .cue .stage-dir {
+    font-size: 11.5px; color: var(--orange); font-style: italic; margin-top: 8px;
+    padding: 6px 12px; background: rgba(249,115,22,.07); border-radius: 6px; border: 1px solid rgba(249,115,22,.2);
+  }
+  .cue .stage-dir::before { content: '🎬 '; }
+  .script-divider { height: 1px; background: var(--border); margin: 24px 0; }
+  .recording-tips { background: var(--s2); border-radius: 12px; padding: 20px; margin-top: 8px; }
+  .recording-tips h4 { font-size: 11px; font-weight: 800; text-transform: uppercase; letter-spacing: .14em; color: var(--muted); margin-bottom: 12px; }
+  .recording-tips ul { list-style: none; display: flex; flex-direction: column; gap: 6px; }
+  .recording-tips li { font-size: 12px; color: #a1a1aa; line-height: 1.5; padding-left: 16px; position: relative; }
+  .recording-tips li::before { content: '→'; position: absolute; left: 0; color: var(--lime); font-weight: 700; }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-logo">GOAL <span>AI</span></div>
+  <div class="nav-links">
+    <a href="#onepager">One-Pager</a>
+    <a href="#pitch">2-Min Pitch</a>
+    <a href="#demo">1-Min Demo</a>
+  </div>
+  <div class="nav-badge">⚡ Hackathon Pack</div>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-tag">⚽ Stanford × DeepMind Hackathon · July 19, 2025</div>
+  <h1>GOAL <span>AI</span></h1>
+  <div class="hero-sub">Webcam Gesture Penalty Simulator</div>
+  <p class="hero-desc">Your browser. Your camera. Your hands. A full football penalty experience powered by MediaPipe hand tracking and Google Gemini live commentary — zero installs, zero hardware.</p>
+  <div class="hero-tracks">
+    <span class="track replit">✓ Replit Track</span>
+    <span class="track gai">✓ Google AI Studio Track</span>
+  </div>
+  <div class="divider"></div>
+</section>
+
+<!-- ─────────────── ONE-PAGER ─────────────── -->
+<section id="onepager">
+  <div class="sec-label">01 — Submission Deliverable</div>
+  <div class="sec-title">One-Pager</div>
+
+  <!-- Team -->
+  <div style="margin-bottom:28px">
+    <p class="card-label" style="margin-bottom:12px">The Builder</p>
+    <div class="team-card">
+      <div class="avatar">M</div>
+      <div class="team-info">
+        <div class="name">M Usman Mughal</div>
+        <div class="role">Fullstack Engineer · Solo Submission</div>
+        <div class="pills">
+          <span class="pill g">Replit Track ✓</span>
+          <span class="pill g">Gemini API ✓</span>
+          <span class="pill g">Live Prototype ✓</span>
+          <span class="pill d">Solo</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Problem / Solution -->
+  <div class="grid-2">
+    <div class="card">
+      <div class="card-label">The Problem</div>
+      <h3>Sports games require expensive hardware or complex setup</h3>
+      <p>Traditional sports simulations need controllers, motion sensors, or VR headsets. The barrier to entry is high. Meanwhile every laptop ships with a camera — and nobody uses it intelligently for gaming.</p>
+    </div>
+    <div class="card lime">
+      <div class="card-label">The Solution</div>
+      <h3>Your webcam IS the controller</h3>
+      <p>GOAL AI turns any laptop camera into a precision sports input device. MediaPipe detects 21 hand landmarks in real time. A thumbs-up gesture fires the shot; your wrist position sets the aim. Google Gemini 2.0 Flash calls the match live with AI commentary after every kick.</p>
+      <div class="gemini-badge">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="10" fill="#4285F4"/><path d="M12 6l1.5 4.5H18l-3.75 2.73 1.43 4.4L12 15.15l-3.68 2.48 1.43-4.4L6 10.5h4.5z" fill="#fff"/></svg>
+        Powered by Google Gemini 2.0 Flash
+      </div>
+    </div>
+  </div>
+
+  <!-- Stats -->
+  <div class="grid-4">
+    <div class="card" style="text-align:center"><span class="stat-big">60</span><span class="stat-lbl">FPS Gameplay</span></div>
+    <div class="card" style="text-align:center"><span class="stat-big">21</span><span class="stat-lbl">Hand Landmarks</span></div>
+    <div class="card" style="text-align:center"><span class="stat-big">0</span><span class="stat-lbl">Server Calls for CV</span></div>
+    <div class="card lime" style="text-align:center"><span class="stat-big" style="font-size:24px">Gemini</span><span class="stat-lbl">AI Commentary</span></div>
+  </div>
+
+  <!-- How it works + Features -->
+  <div class="grid-2">
+    <div class="card">
+      <div class="card-label">How It Works</div>
+      <div class="flow">
+        <div class="flow-box"><span class="icon">📷</span><span class="lbl">Webcam</span></div>
+        <div class="flow-arrow">→</div>
+        <div class="flow-box"><span class="icon">🤚</span><span class="lbl">MediaPipe</span></div>
+        <div class="flow-arrow">→</div>
+        <div class="flow-box"><span class="icon">🎯</span><span class="lbl">Gesture</span></div>
+        <div class="flow-arrow">→</div>
+        <div class="flow-box"><span class="icon">⚽</span><span class="lbl">Game+AI</span></div>
+      </div>
+      <p style="font-size:12px;color:#71717a;margin-top:12px;line-height:1.6">MediaPipe Hands tracks 21 3D landmarks via WebAssembly + WebGL at ~8 FPS. Thumbs-up fires a shot. After each kick, Gemini 2.0 Flash generates a one-line live commentary call.</p>
+    </div>
+    <div class="card">
+      <div class="card-label">Key Features</div>
+      <ul class="feat-list">
+        <li><span class="feat-bullet">→</span>Thumbs-up gesture detection via 21-point landmark geometry</li>
+        <li><span class="feat-bullet">→</span>Real-time aim targeting with 60 FPS canvas rendering</li>
+        <li><span class="feat-bullet">→</span>AI goalkeeper with 3 difficulty tiers (easy → hard)</li>
+        <li><span class="feat-bullet">→</span>Gemini 2.0 Flash live commentary after every kick</li>
+        <li><span class="feat-bullet">→</span>Procedural stadium audio — zero audio files shipped</li>
+        <li><span class="feat-bullet">→</span>Optical-flow fallback — playable without webcam</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- Tech Stack -->
+  <div class="card" style="margin-top:0">
+    <div class="card-label">Tech Stack</div>
+    <div class="tech-pills">
+      <span class="tp g">React 19</span>
+      <span class="tp g">Vite 6</span>
+      <span class="tp g">Google Gemini 2.0 Flash</span>
+      <span class="tp b">MediaPipe Hands (WASM)</span>
+      <span class="tp d">TypeScript</span>
+      <span class="tp d">Tailwind CSS v4</span>
+      <span class="tp d">Web Audio API</span>
+      <span class="tp d">Canvas 2D · 60 FPS</span>
+      <span class="tp g">Replit Static Deploy</span>
+    </div>
+  </div>
+</section>
+
+<!-- ─────────────── 2-MIN PITCH SCRIPT ─────────────── -->
+<section id="pitch">
+  <div class="sec-label">02 — Submission Deliverable</div>
+  <div class="sec-title">2-Minute Pitch Video</div>
+  <p style="color:#a1a1aa;font-size:14px;line-height:1.7;margin-bottom:28px">Team introduction + elevator pitch for the judging panel. Record yourself talking to camera. Keep it punchy — you have exactly 120 seconds.</p>
+
+  <div class="script-card">
+    <div class="script-header">
+      <div class="title">2-Minute Pitch Script — GOAL AI</div>
+      <span class="badge badge-lime">120 seconds</span>
+    </div>
+    <div class="script-body">
+      <div class="script-tip">
+        <strong>Format:</strong> Face-to-camera. Clean background or the live app behind you. Dress sharp. Speak fast but clear.<br>
+        <strong>Tone:</strong> Energetic founder pitch — not a tutorial, not a demo walk-through. Sell the idea.
+      </div>
+
+      <div class="cue">
+        <div class="cue-time">0:00 – 0:10</div>
+        <div class="cue-title">Hook</div>
+        <blockquote>"What if your webcam was a sports controller? No joystick. No gloves. No headset. Just your hand."</blockquote>
+        <div class="stage-dir">Show a 2-second clip of a goal being scored with the hand tracking crosshair visible.</div>
+      </div>
+
+      <div class="cue">
+        <div class="cue-time">0:10 – 0:25</div>
+        <div class="cue-title">Who You Are</div>
+        <blockquote>"I'm Usman Mughal — fullstack engineer — and this is GOAL AI. A real-time penalty kick simulator that runs entirely in your browser, powered by Google Gemini and MediaPipe hand tracking. No install required."</blockquote>
+      </div>
+
+      <div class="cue">
+        <div class="cue-time">0:25 – 0:50</div>
+        <div class="cue-title">The Problem</div>
+        <blockquote>"Every sports game today demands hardware — controllers, motion sensors, VR rigs. The barrier is high. And the AI layer is basically zero. Meanwhile every single laptop ships with a camera that nobody is using intelligently for gaming. That gap is enormous."</blockquote>
+      </div>
+
+      <div class="cue">
+        <div class="cue-time">0:50 – 1:20</div>
+        <div class="cue-title">The Solution — with Live Demo Glimpse</div>
+        <blockquote>"GOAL AI uses MediaPipe hand tracking — running at 60 frames per second directly in WebAssembly — to read 21 landmarks on your hand in real time. You aim with your wrist, and throw a thumbs-up to kick."</blockquote>
+        <div class="stage-dir">Cut to 10-second clip: hand moving on screen, lime-green crosshair tracking across the goal, thumbs-up gesture, GOAL animation fires.</div>
+        <blockquote>"And after every single shot, Google Gemini 2.0 Flash generates a live commentary line — like a real TV announcer calling your penalty in real time."</blockquote>
+        <div class="stage-dir">Show Gemini commentary text appearing on screen after a goal.</div>
+      </div>
+
+      <div class="cue">
+        <div class="cue-time">1:20 – 1:40</div>
+        <div class="cue-title">Why It's Big</div>
+        <blockquote>"This isn't just a game. It's a proof of concept for a new category — AI-native, zero-hardware interactive experiences. The same gesture engine I've built works for fitness, physiotherapy, music, education. The browser is the platform. The camera is the controller. Gemini is the intelligence."</blockquote>
+      </div>
+
+      <div class="cue">
+        <div class="cue-time">1:40 – 1:55</div>
+        <div class="cue-title">The Build</div>
+        <blockquote>"Built entirely on Replit during this hackathon — React 19, Vite, Tailwind, MediaPipe, and the Gemini API. Deployed live as a static site right now. No server. No installs. Works on any device with a camera."</blockquote>
+      </div>
+
+      <div class="cue">
+        <div class="cue-time">1:55 – 2:00</div>
+        <div class="cue-title">Close</div>
+        <blockquote>"GOAL AI. Your webcam is the controller. I'm Usman — let's play."</blockquote>
+        <div class="stage-dir">Hold confident eye contact with the camera. Slight smile. Hard cut.</div>
+      </div>
+
+      <div class="script-divider"></div>
+      <div class="recording-tips">
+        <h4>Recording Tips</h4>
+        <ul>
+          <li>Keep total runtime to 115–120 seconds. Judges have a hard stop.</li>
+          <li>Record at 1080p minimum. Good lighting on your face is more important than background.</li>
+          <li>Cut the clips (goals/commentary) into the video in post — don't screen-share live.</li>
+          <li>Upload to YouTube, set <strong style="color:var(--lime)">Public</strong> before submitting. Title: <em>"GOAL AI — Webcam Football · Gemini · Stanford Hackathon 2025"</em>.</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─────────────── 1-MIN DEMO SCRIPT ─────────────── -->
+<section id="demo">
+  <div class="sec-label">03 — Submission Deliverable</div>
+  <div class="sec-title">1-Minute Demo Video <span style="font-size:16px;color:var(--muted)">(Playcast)</span></div>
+  <p style="color:#a1a1aa;font-size:14px;line-height:1.7;margin-bottom:28px">Screen recording of the app. No face-cam needed. This is the Playcast — it gets shared publicly and its engagement metrics count toward your Phase 2 score, so make it captivating.</p>
+
+  <div class="script-card">
+    <div class="script-header">
+      <div class="title">1-Minute Demo Script — GOAL AI</div>
+      <span class="badge badge-orange">60 seconds</span>
+    </div>
+    <div class="script-body">
+      <div class="script-tip">
+        <strong>Format:</strong> Screen recording — browser, full width. Add background music (upbeat, no copyright).<br>
+        <strong>Goal:</strong> Judges and viewers should understand the product in one watch. No narration needed — let on-screen text overlays do the talking.
+      </div>
+
+      <div class="cue">
+        <div class="cue-time">0:00 – 0:05</div>
+        <div class="cue-title">Title Card</div>
+        <blockquote>Static screen: "GOAL AI — Webcam Gesture Edition" · subtitle: "Powered by Google Gemini · Built on Replit"</blockquote>
+        <div class="stage-dir">Dark background, lime-green typography matching the app. Fade in from black.</div>
+      </div>
+
+      <div class="cue">
+        <div class="cue-time">0:05 – 0:15</div>
+        <div class="cue-title">The Arena Loads</div>
+        <blockquote>Browser opens the live URL. Stadium, goalkeeper, and WC2026 ball appear on the penalty spot.</blockquote>
+        <div class="stage-dir">Text overlay bottom-left: "No installs. Open browser. Start playing."</div>
+      </div>
+
+      <div class="cue">
+        <div class="cue-time">0:15 – 0:30</div>
+        <div class="cue-title">Gesture Tracking in Action</div>
+        <blockquote>Show the PIP camera view with your hand in frame. Lime-green crosshair tracks across the goal as your wrist moves left, right, up, down.</blockquote>
+        <div class="stage-dir">Text overlay: "21-point MediaPipe hand tracking · 60 FPS · runs in WebAssembly"</div>
+      </div>
+
+      <div class="cue">
+        <div class="cue-time">0:30 – 0:45</div>
+        <div class="cue-title">The Kick + Gemini Commentary ← KEY MOMENT</div>
+        <blockquote>Thumbs-up gesture. Ball fires toward top-right corner. GOAL animation explodes. Net ripples.</blockquote>
+        <div class="stage-dir">Wait for Gemini commentary text to appear fully — pause on it for 1 second. This is what makes it unique. Show 2–3 different commentary lines across different kicks. Text overlay: "Google Gemini 2.0 Flash — live AI commentary after every shot"</div>
+      </div>
+
+      <div class="cue">
+        <div class="cue-time">0:45 – 0:53</div>
+        <div class="cue-title">Goalkeeper Save</div>
+        <blockquote>Aim slightly off-center. SAVED! overlay fires. Show the keeper diving animation.</blockquote>
+        <div class="stage-dir">Text overlay: "AI goalkeeper · 3 difficulty levels · Hard mode saves 85% of shots"</div>
+      </div>
+
+      <div class="cue">
+        <div class="cue-time">0:53 – 1:00</div>
+        <div class="cue-title">End Card</div>
+        <blockquote>Full-screen card: "GOAL AI" / "Your webcam. Your hands. Your game." / "Built with Google Gemini + Replit · Stanford × DeepMind Hackathon 2025" / [your live .replit.app URL]</blockquote>
+        <div class="stage-dir">Fade to black. Keep the URL on screen for 3 seconds so viewers can type it.</div>
+      </div>
+
+      <div class="script-divider"></div>
+      <div class="recording-tips">
+        <h4>Playcast Recording Tips</h4>
+        <ul>
+          <li>Record at 1280×720 minimum. The game canvas looks best at full browser width.</li>
+          <li>Make sure your hand is well-lit for the webcam tracking section — dim hands = bad tracking footage.</li>
+          <li><strong style="color:var(--lime)">Don't cut away during Gemini commentary</strong> — hold the shot so judges clearly read the AI text. It's your biggest differentiator.</li>
+          <li>Burn text overlays into the video (not as subtitles) so they show even when muted. Most people watch muted.</li>
+          <li>Add captions/subtitles for accessibility and muted autoplay on social.</li>
+          <li>YouTube title for max reach: <em>"World Cup 2026 Penalty Kicks using just your Webcam + AI (Google Gemini)"</em></li>
+          <li>Share on Twitter/X, LinkedIn, and any dev communities. Phase 2 score = 7-day social engagement.</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+</body>
+</html>

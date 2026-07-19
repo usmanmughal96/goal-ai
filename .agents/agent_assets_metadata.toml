@@ -11,10 +11,16 @@ title = "GOAL AI — Project Deck"
 id = "aFlnpjVPkJGYHv8YuMAFW"
 uri = "file://deliverables/one-pager.html"
 type = "unspecified"
-title = "GOAL AI — One-Pager (Hackathon)"
+title = "One-Pager — GOAL AI Team & Idea"
 
 [[outputs]]
 id = "i9r0q0fTbIbnx29KUjEpp"
 uri = "file://deliverables/video-scripts.md"
 type = "text"
 title = "Video Scripts — 2-min Pitch + 1-min Demo"
+
+[[outputs]]
+id = "6oFqnwDvI6GDPl5ne558b"
+uri = "file://deliverables/hackathon-pack.html"
+type = "unspecified"
+title = "GOAL AI — Full Hackathon Pack (One-Pager + Scripts)"
