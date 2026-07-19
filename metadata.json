@@ -1,0 +1,6 @@
+{
+  "name": "GOAL AI",
+  "description": "An interactive webcam-powered penalty shootout game. Aim with your hand and kick using high-precision thumbs-up gesture tracking.",
+  "requestFramePermissions": ["camera"],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
