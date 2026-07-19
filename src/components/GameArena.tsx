@@ -107,6 +107,14 @@ export default function GameArena({
     roundPending: true,
   });
 
+  // World Cup 2026 ball image
+  const ballImageRef = useRef<HTMLImageElement | null>(null);
+  useEffect(() => {
+    const img = new Image();
+    img.src = '/ball-wc2026.png';
+    img.onload = () => { ballImageRef.current = img; };
+  }, []);
+
   // Mouse fallback tracking coordinates
   const [dragStart, setDragStart] = useState<{ x: number; y: number } | null>(null);
   const [dragCurrent, setDragCurrent] = useState<{ x: number; y: number } | null>(null);
@@ -389,38 +397,26 @@ export default function GameArena({
       ctx.fillStyle = 'rgba(0, 0, 0, 0.35)';
       ctx.fill();
 
-      // 8. DRAW SOCCER BALL WITH 3D RADIUS & ROTATION
-      // Ball size scales down as it flies further away (z coordinate 0 -> 1)
+      // 8. DRAW SOCCER BALL WITH 3D RADIUS & ROTATION (WC 2026 Adidas Trionda)
       const ballRadius = Math.max(7, 26 * (1 - sim.bz * 0.65));
       ctx.save();
       ctx.translate(sim.bx, sim.by);
       ctx.rotate(sim.ballAngle);
-      
-      // Outer border circle
-      ctx.beginPath();
-      ctx.arc(0, 0, ballRadius, 0, 2 * Math.PI);
-      ctx.fillStyle = '#ffffff';
-      ctx.fill();
-      ctx.strokeStyle = '#334155';
-      ctx.lineWidth = 1.5;
-      ctx.stroke();
 
-      // Draw classic pentagon football stripes
-      ctx.fillStyle = '#1e293b';
-      ctx.beginPath();
-      ctx.arc(0, 0, ballRadius * 0.35, 0, 2 * Math.PI);
-      ctx.fill();
-
-      // Hex stripes
-      ctx.strokeStyle = '#1e293b';
-      ctx.lineWidth = 1;
-      for (let i = 0; i < 5; i++) {
-        const angle = (i * 2 * Math.PI) / 5;
-        const hx = Math.cos(angle) * ballRadius;
-        const hy = Math.sin(angle) * ballRadius;
+      if (ballImageRef.current) {
+        // Clip to circle so the image stays round
         ctx.beginPath();
-        ctx.moveTo(0, 0);
-        ctx.lineTo(hx, hy);
+        ctx.arc(0, 0, ballRadius, 0, 2 * Math.PI);
+        ctx.clip();
+        ctx.drawImage(ballImageRef.current, -ballRadius, -ballRadius, ballRadius * 2, ballRadius * 2);
+      } else {
+        // Fallback to plain white ball while image loads
+        ctx.beginPath();
+        ctx.arc(0, 0, ballRadius, 0, 2 * Math.PI);
+        ctx.fillStyle = '#ffffff';
+        ctx.fill();
+        ctx.strokeStyle = '#334155';
+        ctx.lineWidth = 1.5;
         ctx.stroke();
       }
       ctx.restore();
