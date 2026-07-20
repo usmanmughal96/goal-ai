@@ -1,0 +1,298 @@
+Events
+Calendars
+Discover
+4:48 PM GMT+5
+Create Event
+Cover Image for Stanford x DeepMind Hackathon: Build. Ship. Win up to $5M in Seed Funding*
+Cover Image for Stanford x DeepMind Hackathon: Build. Ship. Win up to $5M in Seed Funding*
+Avatar for GDG Stanford
+Presented by
+GDG Stanford
+Hosted By
+Dan Goncharov
+Google DeepMind
+Jessy Tang
+AI
+Featured in 
+Google DeepMind
+Stanford x DeepMind Hackathon: Build. Ship. Win up to $5M in Seed Funding*
+Jul
+19
+Sunday, July 19
+10:00 AM - 6:00 PM PDT
+To Be Announced
+Stanford, United States
+Pending Approval
+This event has ended. See you next time!
+About Event
+​​🚀 Stanford x DeepMind Hackathon: Build with Google Gemini
+
+​Win up to $5M in Seed Funding | July 19th, 10am–6pm PT
+
+​Join GDG Stanford for an elite hackathon where you'll build cutting-edge projects with Google Gemini and earn 30-minute VC pitch meetings with top-tier investors.
+​​🏆 The Prize
+
+​Top teams will be judged by representatives from Stanford, Google, and multiple venture capital funds. Winners earn direct pitch access to VCs writing $500K–$5M seed checks, plus prize funds from our sponsors:
+
+​Google AI Studio Track (sponsored by DeepMind)
+
+    ​In-Person: Share of $15K in GCP credits
+
+    ​Online: Share of $5K in GCP credits
+
+​Replit + Gemini Track (in-person only)
+
+    ​Share of $12K prize fund in Replit credits
+
+​Investment not guaranteed. Prize is pitch access only. Winning teams gain meeting access but must earn investment through their pitch and business fundamentals.
+
+​👥 Judging Panel
+
+    ​Felix To — Investor @ NFX Fund
+
+    ​Jian Moon — Investor @ Menlo VC
+
+    ​Vikram Venkat — Investor @ Cota Capital
+
+    ​Kabir Sial — Investor @ Emergence Capital
+
+    ​Kavon Badie — Investor @ Mighty Capital
+
+    ​Vinod Joseph — Investor @ Samsung Next
+
+    ​Tessa Osborne — Investor @ Plug and Play
+
+    ​Nancy Wang — Partner @ Felicis; CTO @ 1Password
+
+    ​Celestine Schnugg — General Partner @ Boom Capital
+
+    ​Anitha Vadavatha — Managing Partner @ AB Plus Ventures
+
+    ​Leonard Lee — Head of Accelerator @ 500 Global
+
+    ​Iris Sun — Partner @ 500 Global
+
+    ​Angelica Parente, PhD — Partner @ Civilization Ventures
+
+    ​Morgan Blumberg — Partner @ M13
+
+    ​Anne Dwane — General Partner @ Village Global
+
+    ​Prof. Nikesh Kotecha — Head of Data Science @ Stanford Health Care
+
+    ​Denis Belyavsky — Founder @ 12 Scrappy Founders
+
+    ​Debojyoti (Debo) Dutta — Chief AI Officer @ Nutanix
+
+    ​Remi Kaito — Founder @ Arcade AI
+
+    ​Lawrence Lou — Investor @ Llama Ventures
+
+    ​Skylar Dorosin — Investor @ NVP Capital
+
+    ​Tanya Jomaa — Investor @ Redpoint Ventures
+
+    ​Çağla Kaymaz — Investor @ Category Ventures
+
+    ​Keerthi Nalabotu — Investor @ True Ventures
+
+    ​Kishen Patel — Investor @ Greycroft
+
+    ​Lan Wu — Investor @ Fusion Fund
+
+    ​Kevin Bernal — Investor @ Mighty Capital
+
+    ​Nick Rabjohn — Investor @ Amity Ventures
+
+    ​Sarah Wang — Investor @ VU Venture Partners
+
+    ​Philippe Mallette — Investor @ Flourish Ventures
+
+    ​Raphaella Lancia — Sr. Director @ Experian
+
+    ​Sanjukta Bhattacharya — Founder @ Atlas Discovery (YC S26)
+
+    ​Shaurya Aggarwal — Founder @ Florin (YC S26)
+
+    ​Ömer Karışman — Founder @ inference.sh
+
+    ​Greg Henrion — Founder @ Sunset.video
+
+    ​Xaviera Ho — Replit
+
+    ​Vino Duraisamy — Snowflake
+
+    ​Jaidev Shah — DeepMind
+
+    ​Min Choi — DeepMind
+
+    ​Jesse Tang — Co-Organizer; Arcade AI
+
+    ​Aditya Singh — Co-Organizer
+
+    ​Amit Vadi — Co-Organizer; DeepMind
+
+    ​Ivan Leo — Co-Organizer; DeepMind
+
+​​📅 Event Schedule
+
+    ​10:00 AM — Registration & Breakfast – Light refreshments and networking with fellow builders
+
+    ​10:30 AM — Opening Ceremony & Rules Briefing – Official rules, competition format
+
+    ​11:30 AM — Hacking Begins! – 3-hour intensive build sprint starts
+
+    ​2:30 PM — Submission Deadline (Hard Stop) – All submissions must be completed
+
+    ​2:30 PM — Late Lunch – Sandwiches/beverages and networking with fellow builders
+
+    ​3:30 PM — Semi-Finalists Announced – Top teams selected for live pitches
+
+    ​4:00 PM — Live Finals Presentations – Top teams pitch on stage (5 min pitch + 5 min Q&A)
+
+    ​5:30 PM — Winners Announced – Grand prize winners revealed
+
+    ​6:00 PM — Event Wrap-Up
+
+​​🌐 Online Track
+
+​Can't make it to Stanford? We've got you covered. We've added an Online Track for remote participants:
+
+    ​No live streaming or video conferencing – work on your own schedule
+
+    ​Submission deadline: End of day, July 19th
+
+    ​Same deliverables as in-person participants
+
+    ​Judging based on traction – same conditions as Phase 2 (7-day social engagement tracking)
+
+    ​Prize pool: $5K in GCP credits for Online Track winners
+
+    ​VC pitch access for top submissions
+
+​Build with Gemini, ship a prototype, post your demo, and let your network do the talking. Top submissions get 30-minute meetings with funds.
+​​⚡ Replit Track
+
+​A second in-person track for builders who want to ship with Replit.
+
+    ​In-person only – teams build and host their prototype entirely on Replit
+
+    ​Must use the Gemini model – projects must integrate Google Gemini, same as the main track
+
+    ​Same event schedule and submission deadline as the main track (2:30 PM sharp)
+
+    ​Same submission requirements and judging criteria as the main track
+
+    ​Prize pool: $12K prize fund for Replit Track winners
+
+    ​VC pitch access for top submissions
+
+​​📋 Submission Requirements
+
+​All projects, including Replit Track submissions, must use the Google Gemini model.
+
+​Each team must submit by 2:30 PM sharp:
+
+    ​One-Pager — Document describing your team and idea
+
+    ​Hosted Prototype — Working demo link (via Google AI Studio & Google Cloud Run, or Replit for the Replit Track)
+
+    ​2-Minute Video — Team introduction and elevator pitch
+
+    ​1-Minute Video — Prototype demo (Playcast)
+
+    ​Code Repository — Link via Google AI Studio sharing mechanics, or your Replit project link for the Replit Track
+
+​Data Usage & Judging Consent: By submitting your prototype playcast, you authorize organizers to use your submission in paid social ads (e.g., Facebook). Real-world performance metrics (CPM, CTR, CPC, etc.) will be collected and used as core market validation data for Phase 2 (post-event) judging. You may opt out by notifying organizers prior to submission; data sharing with sponsors and investors is a condition of participation.
+​​⚖️ Judging Criteria
+
+​Projects will be evaluated on:
+
+    ​Technical Feasibility — Does it actually work?
+
+    ​Innovation & Novelty — Is the approach creative or clever?
+
+    ​Real-World Applicability — Would people genuinely use it?
+
+    ​Market Potential & Fundability — Could this become venture-backable?
+
+    ​Go-to-Market Traction — Social engagement on your demo video (likes, shares, views)
+
+​Social Engagement Component
+
+​Your demo YouTube video must be shared publicly. Engagement counts toward your score:
+
+    ​Phase 1: Engagement tracked during the hackathon (5 PM deadline)
+
+    ​Phase 2: Continued tracking for 2 weeks post-event (viral reach + playcast metrics)
+
+​​🎯 Competition Format
+
+    ​Semi-Finals: All submissions undergo asynchronous review by the judging panel.
+
+    ​Finals: Top teams advance to live presentations:
+
+        ​10 minutes per team (5 min pitch + 5 min Q&A)
+
+        ​Present on stage to the full panel of VCs and special guests
+
+        ​Winners announced at 5:30 PM
+
+​Whether you're a solo developer, have a team, or are already building a startup (some invited participants are at Series A stage), this event offers a unique opportunity to showcase your work to decision-makers at leading venture funds.
+​​❓ Frequently Asked Questions
+
+​Q: Can I pitch an existing startup? A: Absolutely! If you win, you can pitch either your hackathon project OR your existing company during the 30-minute VC meetings.
+
+​Q: What's the team size limit? A: Up to 5 people.
+
+​Q: Can I participate solo? A: Yes.
+
+​Q: Can I participate remotely? A: Yes! The Online Track has the same deliverables, with submissions due by end of day, July 19th. No live streaming—judging is based on 7-day social engagement (Phase 2 conditions). Online Track has a $5K GCP credits prize pool.
+
+​Q: When do VC meetings happen? A: Winners will schedule 30-minute pitch meetings with selected funds after the event.
+
+​Q: What should I bring? A: Laptop, charger, and your best ideas!
+​​🎁 What You'll Win
+
+​Grand Prize
+
+​A 30-minute private pitch meeting with selected funds from our judging panel, where you can pitch your hackathon project or your existing startup.
+​Our Silver Sponsor
+
+    ​Arcade AI: Arcade AI is an infinite world of AI-native games, built by creators and played by everyone. Join Arcade to create, remix, and play games with your AI companion and friends, instantly in the browser. Create anything. Play everything. Together.
+    👉 joinarcade.ai
+
+​📌 Age Requirement: This event is open to participants 18 years and older. Valid ID may be required for check-in.
+​Prerequisite Assignment
+
+​To make sure you're ready to compete in our main Google DeepMind track, please take a few minutes to complete the prerequisite assignment/tutorial below.
+
+​What to do
+
+    ​Spend 5–10 minutes creating a simple prototype in AI Studio.
+
+    ​Submit it through the provided Google Form.
+
+​This confirms that:
+
+    ​You're familiar with the platform
+
+    ​Your GCP billing account is enabled
+
+​Resources
+
+    ​Tutorial: https://cloud.google.com/blog/topics/developers-practitioners/getting-started-with-gemini-3-deploy-your-first-gemini-3-app-to-google-cloud-run
+
+    ​Submit your test app: https://forms.gle/uhyoPS2GhzK2N4Vh8
+
+    ​Deadline: Saturday at 9:00 AM PST
+
+​Thank you!
+
+​P.S. If your application is still pending, we highly recommend finishing and submitting the prerequisites!
+Location
+Please register to see the exact location of this event.
+Stanford, United States
+DiscoverPricingHelp
+Get the App
+
