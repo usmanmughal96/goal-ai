@@ -1082,40 +1082,41 @@ export default function GameArena({
     <div className="w-full flex flex-col items-center">
       
       {/* Game Header scoreboards */}
-      <div className="w-full max-w-4xl flex flex-col md:flex-row justify-between items-center gap-4 mb-5 p-5 rounded-2xl border border-white/10 bg-zinc-900 shadow-2xl">
+      <div className="w-full max-w-4xl flex items-center justify-between gap-2 mb-2 sm:mb-5 px-3 py-2.5 sm:p-5 rounded-xl sm:rounded-2xl border border-white/10 bg-zinc-900 shadow-2xl">
         
-        {/* Left: Score multipliers */}
-        <div className="flex items-center gap-6">
+        {/* Left: Score + Attempts + Streak */}
+        <div className="flex items-center gap-2 sm:gap-6 min-w-0">
           <div>
-            <div className="text-[9px] text-zinc-500 font-bold uppercase tracking-widest">Score Points</div>
-            <div className="text-3xl font-black text-lime-400 font-mono leading-none mt-1">{score}</div>
+            <div className="text-[8px] sm:text-[9px] text-zinc-500 font-bold uppercase tracking-widest">Score</div>
+            <div className="text-xl sm:text-3xl font-black text-lime-400 font-mono leading-none mt-0.5">{score}</div>
           </div>
-          <div className="h-8 w-px bg-white/10" />
+          <div className="h-6 w-px bg-white/10 hidden sm:block" />
           <div>
-            <div className="text-[9px] text-zinc-500 font-bold uppercase tracking-widest">Penalty Kicks</div>
-            <div className="text-lg font-black font-mono text-white leading-none mt-1">
-              {attempts} <span className="text-[10px] text-zinc-500 uppercase font-bold tracking-wider">ATTEMPTS</span>
+            <div className="text-[8px] sm:text-[9px] text-zinc-500 font-bold uppercase tracking-widest hidden sm:block">Penalty Kicks</div>
+            <div className="text-sm sm:text-lg font-black font-mono text-white leading-none mt-0.5 sm:mt-1">
+              {attempts}<span className="text-[9px] sm:text-[10px] text-zinc-500 uppercase font-bold tracking-wider ml-1">kicks</span>
             </div>
           </div>
           {streak > 0 && (
-            <div className="flex items-center gap-1.5 px-3 py-1 bg-lime-400/10 border border-lime-400/30 text-lime-400 rounded-full text-[10px] font-black uppercase tracking-widest animate-pulse">
-              <Flame className="w-3.5 h-3.5 fill-current text-orange-500" /> STREAK: {streak}X
+            <div className="flex items-center gap-1 sm:gap-1.5 px-2 sm:px-3 py-1 bg-lime-400/10 border border-lime-400/30 text-lime-400 rounded-full text-[9px] sm:text-[10px] font-black uppercase tracking-widest animate-pulse">
+              <Flame className="w-3 h-3 sm:w-3.5 sm:h-3.5 fill-current text-orange-500" />
+              <span className="hidden sm:inline">STREAK: </span>{streak}X
             </div>
           )}
         </div>
 
         {/* Right: Sound Controls & Game Buttons */}
-        <div className="flex items-center gap-3">
+        <div className="flex items-center gap-1.5 sm:gap-3 shrink-0">
           <button
             onClick={() => setMuted(!muted)}
-            className={`p-2.5 rounded-full border transition-all cursor-pointer ${
+            className={`p-2 sm:p-2.5 rounded-full border transition-all cursor-pointer ${
               muted 
                 ? 'bg-red-500/10 border-red-500/30 text-red-400' 
                 : 'bg-zinc-850 hover:bg-zinc-800 border-white/10 text-white/80 hover:text-white'
             }`}
             title={muted ? 'Unmute Sound' : 'Mute Sound'}
           >
-            {muted ? <VolumeX className="w-4 h-4" /> : <Volume2 className="w-4 h-4" />}
+            {muted ? <VolumeX className="w-3.5 h-3.5" /> : <Volume2 className="w-3.5 h-3.5" />}
           </button>
 
           <button
@@ -1124,17 +1125,18 @@ export default function GameArena({
                 onHome();
               }
             }}
-            className="p-2.5 bg-zinc-850 hover:bg-zinc-800 border border-white/10 text-white/80 hover:text-white rounded-full transition-all cursor-pointer"
+            className="p-2 sm:p-2.5 bg-zinc-850 hover:bg-zinc-800 border border-white/10 text-white/80 hover:text-white rounded-full transition-all cursor-pointer"
             title="Lobby Exit"
           >
-            <Home className="w-4 h-4" />
+            <Home className="w-3.5 h-3.5" />
           </button>
 
           <button
             onClick={handleEndGame}
-            className="px-6 py-2.5 bg-lime-400 hover:bg-lime-300 text-black text-[10px] font-black uppercase tracking-widest rounded-full shadow-[0_0_15px_rgba(163,230,53,0.3)] transition-all cursor-pointer"
+            className="px-3 sm:px-6 py-2 sm:py-2.5 bg-lime-400 hover:bg-lime-300 text-black text-[9px] sm:text-[10px] font-black uppercase tracking-widest rounded-full shadow-[0_0_15px_rgba(163,230,53,0.3)] transition-all cursor-pointer"
           >
-            Finish Match
+            <span className="hidden sm:inline">Finish Match</span>
+            <span className="sm:hidden">End</span>
           </button>
         </div>
       </div>
@@ -1164,7 +1166,7 @@ export default function GameArena({
 
         {/* Visual PIP camera feed so users know their fingers are center aligned! */}
         {webcamStream && (
-          <div className="absolute bottom-4 right-4 bg-zinc-900/90 backdrop-blur-md border border-white/10 rounded-2xl overflow-hidden p-1 w-44 shadow-2xl z-10">
+          <div className="absolute bottom-2 right-2 sm:bottom-4 sm:right-4 bg-zinc-900/90 backdrop-blur-md border border-white/10 rounded-xl sm:rounded-2xl overflow-hidden p-1 w-24 sm:w-32 md:w-44 shadow-2xl z-10">
             <div className="relative aspect-[4/3] w-full bg-black rounded-xl overflow-hidden">
               {/* Stable PIP Video */}
               <video
@@ -1216,19 +1218,21 @@ export default function GameArena({
         />
 
         {/* Performance HUD (latency, fps) overlay from Design HTML */}
-        <div className="absolute top-6 left-6 flex gap-3 pointer-events-none select-none">
-          <div className="bg-black/70 backdrop-blur px-4 py-1.5 rounded-full border border-white/10 text-[9px] font-black uppercase tracking-widest text-white/70">
-            LATENCY: <span className="text-lime-400 font-mono">14MS</span>
+        <div className="absolute top-2 sm:top-6 left-2 sm:left-6 flex gap-1.5 sm:gap-3 pointer-events-none select-none flex-wrap max-w-[calc(100%-56px)] sm:max-w-none">
+          <div className="hidden sm:flex bg-black/70 backdrop-blur px-4 py-1.5 rounded-full border border-white/10 text-[9px] font-black uppercase tracking-widest text-white/70">
+            LATENCY: <span className="text-lime-400 font-mono ml-1">14MS</span>
           </div>
-          <div className="bg-black/70 backdrop-blur px-4 py-1.5 rounded-full border border-white/10 text-[9px] font-black uppercase tracking-widest text-white/70">
-            FPS: <span className="text-lime-400 font-mono">60</span>
+          <div className="hidden sm:flex bg-black/70 backdrop-blur px-4 py-1.5 rounded-full border border-white/10 text-[9px] font-black uppercase tracking-widest text-white/70">
+            FPS: <span className="text-lime-400 font-mono ml-1">60</span>
           </div>
-          <div className="bg-black/70 backdrop-blur px-4 py-1.5 rounded-full border border-white/10 text-[9px] font-black uppercase tracking-widest text-white/70">
-            LEVEL: <span className="text-lime-400 font-mono uppercase">{difficulty}</span>
+          <div className="bg-black/70 backdrop-blur px-2.5 sm:px-4 py-1 sm:py-1.5 rounded-full border border-white/10 text-[8px] sm:text-[9px] font-black uppercase tracking-widest text-white/70">
+            LVL: <span className="text-lime-400 font-mono uppercase">{difficulty}</span>
           </div>
           {webcamStream && (
-            <div className="bg-black/70 backdrop-blur px-4 py-1.5 rounded-full border border-lime-400/30 text-[9px] font-black uppercase tracking-widest text-lime-400 flex items-center gap-1">
-              <span className="w-1.5 h-1.5 rounded-full bg-lime-400 animate-pulse" /> WEBCAM TRACKING: ACTIVE
+            <div className="bg-black/70 backdrop-blur px-2.5 sm:px-4 py-1 sm:py-1.5 rounded-full border border-lime-400/30 text-[8px] sm:text-[9px] font-black uppercase tracking-widest text-lime-400 flex items-center gap-1">
+              <span className="w-1.5 h-1.5 rounded-full bg-lime-400 animate-pulse" />
+              <span className="hidden sm:inline">WEBCAM TRACKING: ACTIVE</span>
+              <span className="sm:hidden">CAM ✓</span>
             </div>
           )}
         </div>
@@ -1236,17 +1240,17 @@ export default function GameArena({
         {/* HIGH CONTRAST ANNOUNCEMENT HUD OVERLAYS (Design HTML Goals) */}
         {messageType === 'goal' && (
           <div className="absolute inset-0 flex flex-col items-center justify-center pointer-events-none select-none bg-lime-400/5 backdrop-blur-xs">
-            <div className="text-[120px] md:text-[150px] font-black italic leading-none text-white uppercase tracking-tighter drop-shadow-[0_15px_40px_rgba(163,230,53,0.5)] animate-pulse">
+            <div className="text-[52px] sm:text-[90px] md:text-[120px] lg:text-[150px] font-black italic leading-none text-white uppercase tracking-tighter drop-shadow-[0_15px_40px_rgba(163,230,53,0.5)] animate-pulse">
               GOAL!
             </div>
-            <div className="mt-[-15px] bg-white text-black px-5 py-1 text-xs font-black uppercase tracking-widest">
+            <div className="mt-[-8px] sm:mt-[-15px] bg-white text-black px-3 sm:px-5 py-0.5 sm:py-1 text-[9px] sm:text-xs font-black uppercase tracking-widest">
               COMBO x{streak}
             </div>
             {commentary && (
-              <div className="mt-4 flex items-center gap-2 bg-black/70 border border-lime-400/30 px-4 py-2 rounded-full max-w-sm text-center">
-                <span className="text-lime-400 text-[10px]">✦</span>
-                <p className="text-[11px] text-lime-300 font-semibold italic">{commentary}</p>
-                <span className="text-[8px] text-lime-400/50 font-mono uppercase tracking-widest ml-1">Gemini</span>
+              <div className="mt-3 sm:mt-4 flex items-center gap-2 bg-black/70 border border-lime-400/30 px-3 sm:px-4 py-1.5 sm:py-2 rounded-full max-w-[90%] sm:max-w-sm text-center">
+                <span className="text-lime-400 text-[10px] shrink-0">✦</span>
+                <p className="text-[10px] sm:text-[11px] text-lime-300 font-semibold italic">{commentary}</p>
+                <span className="text-[8px] text-lime-400/50 font-mono uppercase tracking-widest ml-1 shrink-0">AI</span>
               </div>
             )}
           </div>
@@ -1254,17 +1258,17 @@ export default function GameArena({
 
         {messageType === 'saved' && (
           <div className="absolute inset-0 flex flex-col items-center justify-center pointer-events-none select-none bg-red-500/5 backdrop-blur-xs">
-            <div className="text-[100px] md:text-[130px] font-black italic leading-none text-red-500 uppercase tracking-tighter drop-shadow-[0_15px_40px_rgba(239,68,68,0.4)]">
+            <div className="text-[44px] sm:text-[76px] md:text-[100px] lg:text-[130px] font-black italic leading-none text-red-500 uppercase tracking-tighter drop-shadow-[0_15px_40px_rgba(239,68,68,0.4)]">
               SAVED!
             </div>
-            <div className="mt-[-10px] bg-black text-white px-5 py-1 text-[9px] font-black uppercase tracking-widest border border-white/20">
+            <div className="mt-[-6px] sm:mt-[-10px] bg-black text-white px-3 sm:px-5 py-0.5 sm:py-1 text-[8px] sm:text-[9px] font-black uppercase tracking-widest border border-white/20">
               GOALKEEPER BLOCK
             </div>
             {commentary && (
-              <div className="mt-4 flex items-center gap-2 bg-black/70 border border-red-400/30 px-4 py-2 rounded-full max-w-sm text-center">
-                <span className="text-red-400 text-[10px]">✦</span>
-                <p className="text-[11px] text-red-300 font-semibold italic">{commentary}</p>
-                <span className="text-[8px] text-red-400/50 font-mono uppercase tracking-widest ml-1">Gemini</span>
+              <div className="mt-3 sm:mt-4 flex items-center gap-2 bg-black/70 border border-red-400/30 px-3 sm:px-4 py-1.5 sm:py-2 rounded-full max-w-[90%] sm:max-w-sm text-center">
+                <span className="text-red-400 text-[10px] shrink-0">✦</span>
+                <p className="text-[10px] sm:text-[11px] text-red-300 font-semibold italic">{commentary}</p>
+                <span className="text-[8px] text-red-400/50 font-mono uppercase tracking-widest ml-1 shrink-0">AI</span>
               </div>
             )}
           </div>
@@ -1272,17 +1276,17 @@ export default function GameArena({
 
         {messageType === 'post' && (
           <div className="absolute inset-0 flex flex-col items-center justify-center pointer-events-none select-none bg-orange-500/5 backdrop-blur-xs">
-            <div className="text-[100px] md:text-[130px] font-black italic leading-none text-orange-400 uppercase tracking-tighter drop-shadow-[0_15px_40px_rgba(249,115,22,0.4)]">
+            <div className="text-[44px] sm:text-[76px] md:text-[100px] lg:text-[130px] font-black italic leading-none text-orange-400 uppercase tracking-tighter drop-shadow-[0_15px_40px_rgba(249,115,22,0.4)]">
               POST!
             </div>
-            <div className="mt-[-10px] bg-black text-white px-5 py-1 text-[9px] font-black uppercase tracking-widest border border-white/20">
+            <div className="mt-[-6px] sm:mt-[-10px] bg-black text-white px-3 sm:px-5 py-0.5 sm:py-1 text-[8px] sm:text-[9px] font-black uppercase tracking-widest border border-white/20">
               WOODWORK RATTLE
             </div>
             {commentary && (
-              <div className="mt-4 flex items-center gap-2 bg-black/70 border border-orange-400/30 px-4 py-2 rounded-full max-w-sm text-center">
-                <span className="text-orange-400 text-[10px]">✦</span>
-                <p className="text-[11px] text-orange-300 font-semibold italic">{commentary}</p>
-                <span className="text-[8px] text-orange-400/50 font-mono uppercase tracking-widest ml-1">Gemini</span>
+              <div className="mt-3 sm:mt-4 flex items-center gap-2 bg-black/70 border border-orange-400/30 px-3 sm:px-4 py-1.5 sm:py-2 rounded-full max-w-[90%] sm:max-w-sm text-center">
+                <span className="text-orange-400 text-[10px] shrink-0">✦</span>
+                <p className="text-[10px] sm:text-[11px] text-orange-300 font-semibold italic">{commentary}</p>
+                <span className="text-[8px] text-orange-400/50 font-mono uppercase tracking-widest ml-1 shrink-0">AI</span>
               </div>
             )}
           </div>
@@ -1290,17 +1294,17 @@ export default function GameArena({
 
         {messageType === 'missed' && (
           <div className="absolute inset-0 flex flex-col items-center justify-center pointer-events-none select-none bg-black/40">
-            <div className="text-[100px] md:text-[130px] font-black italic leading-none text-zinc-500 uppercase tracking-tighter drop-shadow-[0_15px_40px_rgba(255,255,255,0.1)]">
+            <div className="text-[44px] sm:text-[76px] md:text-[100px] lg:text-[130px] font-black italic leading-none text-zinc-500 uppercase tracking-tighter drop-shadow-[0_15px_40px_rgba(255,255,255,0.1)]">
               MISSED!
             </div>
-            <div className="mt-[-10px] bg-black text-white px-5 py-1 text-[9px] font-black uppercase tracking-widest border border-white/20">
+            <div className="mt-[-6px] sm:mt-[-10px] bg-black text-white px-3 sm:px-5 py-0.5 sm:py-1 text-[8px] sm:text-[9px] font-black uppercase tracking-widest border border-white/20">
               OFF TARGET WIDE
             </div>
             {commentary && (
-              <div className="mt-4 flex items-center gap-2 bg-black/70 border border-white/20 px-4 py-2 rounded-full max-w-sm text-center">
-                <span className="text-zinc-400 text-[10px]">✦</span>
-                <p className="text-[11px] text-zinc-300 font-semibold italic">{commentary}</p>
-                <span className="text-[8px] text-zinc-400/50 font-mono uppercase tracking-widest ml-1">Gemini</span>
+              <div className="mt-3 sm:mt-4 flex items-center gap-2 bg-black/70 border border-white/20 px-3 sm:px-4 py-1.5 sm:py-2 rounded-full max-w-[90%] sm:max-w-sm text-center">
+                <span className="text-zinc-400 text-[10px] shrink-0">✦</span>
+                <p className="text-[10px] sm:text-[11px] text-zinc-300 font-semibold italic">{commentary}</p>
+                <span className="text-[8px] text-zinc-400/50 font-mono uppercase tracking-widest ml-1 shrink-0">AI</span>
               </div>
             )}
           </div>
@@ -1339,8 +1343,8 @@ export default function GameArena({
       </div>
 
       {/* Touch disclaimer */}
-      <p className="text-[9px] text-zinc-500 mt-3 text-center max-w-md font-bold uppercase tracking-wider leading-relaxed">
-        💡 WEBCAM IS OPTIONAL • USE GESTURES IN FRONT OF THE CAMERA, OR CLICK-AND-DRAG FROM THE SOCCER BALL AT THE SPOT TO MANUALLY LAUNCH KICKS.
+      <p className="text-[8px] sm:text-[9px] text-zinc-500 mt-2 sm:mt-3 text-center max-w-md font-bold uppercase tracking-wider leading-relaxed px-4">
+        💡 WEBCAM OPTIONAL • DRAG THE BALL TO KICK OR USE HAND GESTURES IN FRONT OF THE CAMERA.
       </p>
     </div>
   );

@@ -99,21 +99,21 @@ export default function App() {
     <div className="min-h-screen bg-zinc-950 text-white font-sans flex flex-col justify-between selection:bg-lime-400 selection:text-black">
       
       {/* HEADER NAVIGATION */}
-      <header className="relative flex items-center justify-between px-6 py-5 border-b border-white/10 bg-zinc-950 sticky top-0 z-40">
+      <header className="relative flex items-center justify-between px-4 py-3 sm:px-6 sm:py-4 border-b border-white/10 bg-zinc-950 sticky top-0 z-40">
         {/* Left Side (Empty to maintain centered layout) */}
-        <div className="w-10"></div>
+        <div className="w-8 sm:w-10"></div>
         
         {/* Centered Game Name */}
         <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 text-center">
-          <span className="text-2xl font-black italic uppercase tracking-tighter block leading-none">GOAL AI</span>
-          <span className="text-[9px] text-lime-400 font-mono tracking-widest uppercase font-bold">WEBCAM GESTURE EDITION</span>
+          <span className="text-xl sm:text-2xl font-black italic uppercase tracking-tighter block leading-none">GOAL AI</span>
+          <span className="text-[8px] sm:text-[9px] text-lime-400 font-mono tracking-widest uppercase font-bold">WEBCAM GESTURE EDITION</span>
         </div>
         
         {/* Right Side: Sound Icon Only */}
         <div className="flex items-center">
           <button
             onClick={() => setMuted(!muted)}
-            className="p-2 border border-white/10 rounded-lg bg-zinc-900 text-white/70 hover:text-white hover:border-lime-400/50 transition-all cursor-pointer"
+            className="p-1.5 sm:p-2 border border-white/10 rounded-lg bg-zinc-900 text-white/70 hover:text-white hover:border-lime-400/50 transition-all cursor-pointer"
             title={muted ? 'Unmute game' : 'Mute game'}
           >
             {muted ? <VolumeX className="w-3.5 h-3.5" /> : <Volume2 className="w-3.5 h-3.5" />}
@@ -122,7 +122,7 @@ export default function App() {
       </header>
 
       {/* CORE CONTENT AREA */}
-      <main className="flex-1 max-w-7xl w-full mx-auto p-6 md:p-8">
+      <main className="flex-1 max-w-7xl w-full mx-auto px-2 py-3 sm:px-4 sm:py-4 md:px-6 md:py-8">
         
         {/* PHASE A: WELCOME LOBBY SCREEN */}
         {phase === 'welcome' && (
@@ -291,8 +291,8 @@ export default function App() {
       </main>
 
       {/* FOOTER */}
-      <footer className="border-t border-white/10 py-6 px-6 text-center text-xs text-zinc-500 bg-zinc-950">
-        <p className="max-w-md mx-auto uppercase tracking-wider text-[9px] leading-relaxed font-bold">
+      <footer className="border-t border-white/10 py-4 sm:py-6 px-4 sm:px-6 text-center text-xs text-zinc-500 bg-zinc-950">
+        <p className="max-w-md mx-auto uppercase tracking-wider text-[8px] sm:text-[9px] leading-relaxed font-bold">
           GOAL AI Webcam Football is an experimental arcade motion simulator powered by Google AI Studio. 
           Rendered locally at 60 FPS in full-screen desktop precision.
         </p>
